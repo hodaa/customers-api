@@ -10,7 +10,7 @@ Docker
 ## Installation 
 
 - Clone repository so that you can work on it 
-- Run 'sudo docker-compose up'
+- Run `sudo docker-compose up`
 
 ## API Endpoints
 
