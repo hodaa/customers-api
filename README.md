@@ -10,10 +10,12 @@ Docker
 ## Installation 
 
 - Clone repository so that you can work on it 
+- Go to config folder and in `database.php` file  set your DB configuration.
+- Run `vendor/bin/doctrine orm:schema-tool:create`
 - Run `sudo docker-compose up`
 
 ## API Endpoints
-
+,
     * `GET /Customers`
         * Show all Customers
         
@@ -28,4 +30,13 @@ Docker
             
     * `PUT /Customers/{id}`
             * Update customer data
+            
+            
+ 
+## Tools Used
+
+ - PHP 7.1.3+
+ - MySQL
+ - Composer 
+ - Doctrine
    

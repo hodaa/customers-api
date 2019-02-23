@@ -50,6 +50,12 @@ services:
     volumes:
       - ./:/app
 
+  phpunit:
+    image: phpunit/phpunit
+    volumes:
+      - ./:/app
+
+
 
 
 

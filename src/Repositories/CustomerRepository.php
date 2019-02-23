@@ -48,6 +48,7 @@ class CustomerRepository
         $customer = new Customer();
 
         $customer->setName($data['name']);
+        $customer->setAddress($data['address']);
 
         $this->entityManger->persist($customer);
         $this->entityManger->flush();
