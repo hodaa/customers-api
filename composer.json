@@ -1,0 +1,20 @@
+{
+    "name": "hoda/customers",
+    "authors": [
+        {
+            "name": "Hoda",
+            "email": "hoda.hussin@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/http-kernel": "^4.2",
+        "doctrine/orm": "^2.6",
+        "doctrine/annotations": "^1.6",
+        "symfony/routing": "^4.2"
+    },
+    "autoload":  {
+        "psr-4": {
+            "App\\":"src/"
+        }
+    }
+}
