@@ -15,20 +15,20 @@ Docker
 - Run `sudo docker-compose up`
 
 ## API Endpoints
-    * `GET /Customers`
+    * GET /Customers
         * Show all Customers
         
-    * `GET /Customers/{id}`
+    * GET /Customers/{id}
         * show customer details id.
         
-    * `POST /customers`
+    * POST /customers
         * Add customer data
         
-    * `DELETE /Customers/{id}`
-            * Delete requested Customer
+    * DELETE /Customers/{id}
+        * Delete requested Customer
             
-    * `PUT /Customers/{id}`
-            * Update customer data
+    * PUT /Customers/{id}
+        * Update customer data
             
             
 ## Running the tests
