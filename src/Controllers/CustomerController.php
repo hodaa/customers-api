@@ -11,6 +11,10 @@ class CustomerController
 {
     private $customerRepository;
 
+    /**
+     * CustomerController constructor.
+     * @param CustomerRepository $customerRepository
+     */
     public function __construct(CustomerRepository $customerRepository)
     {
         $this->customerRepository = $customerRepository;
@@ -23,7 +27,7 @@ class CustomerController
     {
         $customers = $this->customerRepository->findAll();
 
-        return new JsonResponse($customers);
+        return new JsonResponse(["data"=>$customers,"status"=>200]);
     }
 
     /**
@@ -53,7 +57,7 @@ class CustomerController
         $customer = $this->customerRepository->find($id);
 
         if ($customer) {
-            return new JsonResponse($customer);
+            return new JsonResponse(["data"=>$customer,"status"=>200]);
         }
 
         return new JsonResponse(['message' => 'Customer not found']);
@@ -61,35 +65,28 @@ class CustomerController
 
     /**
      * @param Request $request
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     *
-     * @return Response
+     * @return JsonResponse
      */
     public function delete(Request $request)
     {
         $id = $request->attributes->get('id');
         $this->customerRepository->delete($id);
 
-        return new JsonResponse('Customer Deleted');
+        return new JsonResponse(["message"=>'Customer Deleted',"status"=>"200"]);
     }
 
     /**
      * @param Request $request
-     *
+     * @return JsonResponse
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
-     *
-     * @return Response
      */
     public function update(Request $request)
     {
         $id = $request->attributes->get('id');
-        $name = $request->request->get('name');
+        $data=$request->request->all();
+        $this->customerRepository->update($id, $data);
 
-        $this->customerRepository->update($id, $name);
-
-        return new JsonResponse('Customer updated');
+        return new JsonResponse(["message"=>'Customer updated',"status"=>"200"]);
     }
 }

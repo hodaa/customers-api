@@ -9,13 +9,13 @@ namespace App\Entities;
 class Customer
 {
     /** @Id @Column(type="integer") @GeneratedValue */
-    public $id;
+    private $id;
 
     /** @Column(type="string") */
-    public $name;
+    private $name;
 
     /** @Column(type="string",nullable=true)) */
-    public $address;
+    private $address;
     /**
      * @var datetime
      *
@@ -49,7 +49,7 @@ class Customer
     /**
      * @param $name
      */
-    public function setName($name)
+    public function setName(string $name) :void
     {
         $this->name = $name;
     }
@@ -57,7 +57,7 @@ class Customer
     /**
      * @return mixed
      */
-    public function getAddress()
+    public function getAddress() :string
     {
         return $this->name;
     }
@@ -65,7 +65,7 @@ class Customer
     /**
      * @param $name
      */
-    public function setAddress($address)
+    public function setAddress(string  $address)
     {
         $this->address = $address;
     }

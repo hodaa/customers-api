@@ -32,7 +32,13 @@ Docker
             * Update customer data
             
             
+## Running the tests
+   Execute the following command in your project root to install this library:
  
+ 	./vendor/bin/phpunit tests
+ 
+ 
+
 ## Tools Used
 
  - PHP 7.1.3+
