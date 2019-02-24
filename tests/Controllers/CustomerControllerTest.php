@@ -19,7 +19,7 @@ final class ProgrammerControllerTest extends TestCase
     protected function setUp(): void
     {
         $this->customerRepoObj = $this->createMock(CustomerRepository::class);
-        $this->client = new GuzzleHttp\Client(['base_uri' => 'http://tax.test']);
+        $this->client = new GuzzleHttp\Client(['base_uri' => 'http://localhost:8080']);
     }
 
     /**
