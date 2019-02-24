@@ -15,7 +15,6 @@ Docker
 - Run `sudo docker-compose up`
 
 ## API Endpoints
-,
     * `GET /Customers`
         * Show all Customers
         
