@@ -4,17 +4,25 @@
 namespace App\Controllers;
 
 use App\Repository\CustomerRepository;
-use Symfony\Component\HttpFoundation\JsonResponse;
+
+use App\Traits\ResponseHandler;
+
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class CustomerController
 {
+    use ResponseHandler;
+
     private $customerRepository;
+
 
     /**
      * CustomerController constructor.
      * @param CustomerRepository $customerRepository
      */
+
     public function __construct(CustomerRepository $customerRepository)
     {
         $this->customerRepository = $customerRepository;
@@ -27,7 +35,7 @@ class CustomerController
     {
         $customers = $this->customerRepository->findAll();
 
-        return new JsonResponse(["data"=>$customers,"status"=>200]);
+        return $this->successWithData($customers);
     }
 
     /**
@@ -43,24 +51,27 @@ class CustomerController
         $data = $request->request->all();
         $this->customerRepository->store($data);
 
-        return new JsonResponse('Customer Saved Successfully');
+        return $this->success("Customer Saved Successfully");
     }
 
     /**
      * @param Request $request
-     *
      * @return JsonResponse
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Doctrine\ORM\TransactionRequiredException
      */
     public function show(Request $request)
     {
         $id = $request->attributes->get('id');
         $customer = $this->customerRepository->find($id);
 
-        if ($customer) {
-            return new JsonResponse(["data"=>$customer,"status"=>200]);
+        if (!$customer) {
+            return $this->notFound("Customer Not Exist");
         }
 
-        return new JsonResponse(['message' => 'Customer not found']);
+        return $this->successWithData($customer);
+
     }
 
     /**
@@ -70,9 +81,11 @@ class CustomerController
     public function delete(Request $request)
     {
         $id = $request->attributes->get('id');
-        $this->customerRepository->delete($id);
-
-        return new JsonResponse(["message"=>'Customer Deleted',"status"=>"200"]);
+        $deletd=$this->customerRepository->delete($id);
+        if(!$deletd){
+            return $this->notFound("Customer Not Exists");
+        }
+        return $this->success("Customer Deleted");
     }
 
     /**
@@ -87,6 +100,6 @@ class CustomerController
         $data=$request->request->all();
         $this->customerRepository->update($id, $data);
 
-        return new JsonResponse(["message"=>'Customer updated',"status"=>"200"]);
+       return $this->success("Customer updated");
     }
 }

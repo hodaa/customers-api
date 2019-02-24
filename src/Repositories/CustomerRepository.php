@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of PHP CS Fixer.
- *
- * (c) Fabien Potencier <fabien@symfony.com>
- *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
 
 namespace App\Repository;
 
@@ -54,9 +45,9 @@ class CustomerRepository
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      *
-     * @return Boolean
+     * @return bool
      */
-    public function store($data) :bool
+    public function store($data): bool
     {
         $customer = new Customer();
 
@@ -71,21 +62,30 @@ class CustomerRepository
 
     /**
      * @param int $id
-     * @return array
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \Doctrine\ORM\TransactionRequiredException
+     *
+     * @return array
      */
     public function find(int $id)
     {
         $item = $this->entityManger->find(Customer::class, $id);
 
-        return $this->listItemDetails($item);
+        if ($item) {
+            return $this->listItemDetails($item);
+        }
+
+        return false;
     }
 
     public function delete($id)
     {
         $customer = $this->entityManger->find(Customer::class, $id);
+        if(!$customer){
+            return false;
+        }
         $this->entityManger->remove($customer);
         $this->entityManger->flush();
 
